@@ -1,4 +1,4 @@
-.buttons__close {
+.buttons_close {
   width: 40px;
   height: 40px;
   background-image: url("../../../images/closeicon.svg");
@@ -13,6 +13,16 @@
   transition: opacity 1s linear;
   outline: none;
 }
-.buttons__close:hover {
+
+.buttons_close:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 560px) {
+  .buttons_close {
+    width: 26px;
+    height: 26px;
+    right: 0;
+    top: -40px;
+  }
 }
