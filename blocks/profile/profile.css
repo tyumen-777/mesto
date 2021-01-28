@@ -1,6 +1,8 @@
 .profile {
   display: flex;
   margin-top: 40px;
+  max-width: 880px;
+
 }
 @media screen and (max-width: 756px) {
   .profile {

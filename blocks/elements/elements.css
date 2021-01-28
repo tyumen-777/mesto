@@ -5,6 +5,7 @@
   grid-gap: 20px 17px;
   margin-top: 51px;
   justify-content: center;
+  max-width: 880px;
 }
 
 @media screen and (max-width: 560px) {

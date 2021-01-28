@@ -6,11 +6,11 @@
   margin-bottom: 0;
 }
 
+
 @media screen and (max-width: 560px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
     text-align: center;
   }
-
 }

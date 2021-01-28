@@ -13,12 +13,12 @@
   font-family: Inter , Arial , sans-serif;
   position: relative;
 }
-@media screen and (max-width: 1279px) {
+/*@media screen and (max-width: 1279px) {
   .page__container {
     margin-right:7%;
     margin-left: 7%;
   }
-}
+}*/
 
 @media screen and (max-width: 560px) {
   .page__container {
