@@ -1,4 +1,4 @@
-.buttons_edit {
+.buttons-edit {
   width: 24px;
   height: 24px;
   margin-left: 13px;
@@ -12,12 +12,12 @@
   }
 
 @media screen and (max-width: 560px) {
-  .buttons_edit {
+  .buttons-edit {
     width: 17px;
     height: 17px;
     margin-left: 10px;
   }
 }
-.buttons_edit:hover {
+.buttons-edit:hover {
   opacity: 0.6;
 }

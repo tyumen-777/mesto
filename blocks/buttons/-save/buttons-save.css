@@ -1,4 +1,4 @@
-.buttons_save {
+.buttons-save {
   width: 358px;
   height: 50px;
   background-color: black;
@@ -13,12 +13,12 @@
   transition: opacity 1s linear;
   outline: none;
 }
-  .buttons_save:hover {
+  .buttons-save:hover {
     opacity: 0.8;
   }
 
 @media screen and (max-width: 560px) {
-  .buttons_save {
+  .buttons-save {
     width: 238px;
   }
 }
