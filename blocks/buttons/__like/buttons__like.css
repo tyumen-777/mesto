@@ -1,0 +1,19 @@
+.buttons__like {
+  background: no-repeat center url("../../../images/like_button.png");
+  width: 22px;
+  height: 19px;
+  border: 0;
+  padding: 0;
+  align-self: center;
+  background-size: 100%;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: opacity 1s linear;
+  outline: none;
+}
+.buttons__like:active {
+  background: no-repeat center url("../../../images/like_button_active.png");
+}
+.buttons__like:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,24 @@
+.buttons__save {
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  border: 0;
+  border-radius: 2px;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: opacity 1s linear;
+  outline: none;
+}
+  .buttons__save:hover {
+    opacity: 0.8;
+  }
+
+@media screen and (max-width: 560px) {
+  .buttons__save {
+    width: 238px;
+  }
+}

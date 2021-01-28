@@ -1,0 +1,33 @@
+.buttons__add {
+  width: 150px;
+  height: 50px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 13px;
+  padding: 0;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: black;
+  cursor: pointer;
+  transition: opacity 1s linear;
+  outline: none;
+}
+@media screen and (max-width: 756px) {
+  .buttons__add {
+    margin-top: 36px;
+    width: calc(100% - 38px);
+
+  }
+}
+@media screen and (max-width: 560px) {
+  .buttons__add {
+    margin-left: 0;
+    margin-top: 36px;
+    width: calc(100% - 38px);
+  }
+
+}
+.buttons__add:hover {
+  opacity: 0.6;
+}
