@@ -13,16 +13,32 @@
   font-family: Inter , Arial , sans-serif;
   position: relative;
 }
-/*@media screen and (max-width: 1279px) {
-  .page__container {
-    margin-right:7%;
-    margin-left: 7%;
-  }
-}*/
+
 
 @media screen and (max-width: 560px) {
   .page__container {
     margin-right:auto;
     margin-left: auto;
+  }
+}
+
+@media (max-width: 1279px) {
+  .page__container {
+    margin: 28px 100px 0 100px;
+  }
+}
+@media (max-width: 1080px) {
+  .page__container {
+    margin: 28px 50px 0 50px;
+  }
+}
+@media (max-width: 809px) {
+  .page__container {
+    margin: 28px 20px 0 20px;
+  }
+}
+@media (max-width: 620px){
+  .page__container {
+    margin: 28px 10px 0 10px;
   }
 }
