@@ -17,7 +17,7 @@ function closePopup(evt) {
   if (evt.target === evt.currentTarget) {
 
     togglePopup(evt)
-  }
+  } 
 
 }
 popUpOpenButton.addEventListener('click', togglePopup)
