@@ -24,18 +24,3 @@
   }
 }
 
-@media (max-width: 1080px) {
-  .page__container {
-    margin: 28px 50px 0 50px;
-  }
-}
-@media (max-width: 809px) {
-  .page__container {
-    margin: 28px 20px 0 20px;
-  }
-}
-@media (max-width: 620px){
-  .page__container {
-    margin: 28px 10px 0 10px;
-  }
-}
