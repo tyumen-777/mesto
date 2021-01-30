@@ -1,6 +1,6 @@
 const overlay = document.querySelector('.popup')
-const popUpOpenButton = document.querySelector('.buttons-edit')
-const popUpCloseButton = document.querySelector('.buttons-close')
+const popUpOpenButton = document.querySelector('.profile__button-edit')
+const popUpCloseButton = document.querySelector('.popup__button-close')
 const name = document.querySelector('.profile__name')
 const profession = document.querySelector('.profile__profession')
 const formElement = document.querySelector('.popup__input')// Воспользуйтесь методом querySelector()
