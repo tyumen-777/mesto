@@ -9,37 +9,31 @@ const jobInput = document.querySelector('.popup__field_profession')// Воспо
 function togglePopup(evt) {
   evt.preventDefault()
   overlay.classList.toggle('popup__opened')
-  nameInput.value = (name.textContent)
-  jobInput.value = (profession.textContent)
+
 }
 
 function closePopup(evt) {
   if (evt.target === evt.currentTarget) {
-
     togglePopup(evt)
-  } 
+  }
 
 }
-popUpOpenButton.addEventListener('click', togglePopup)
-popUpCloseButton.addEventListener('click', togglePopup)
-overlay.addEventListener('click', closePopup)
-
-
+function openPopup() {
+  overlay.classList.add('popup__opened')
+  nameInput.value = (name.textContent)
+  jobInput.value = (profession.textContent)
+}
 
 
 function formSubmitHandler(evt) {
-  evt.preventDefault() // Эта строчка отменяет стандартную отправку формы.
-
-
+  evt.preventDefault()
   name.textContent = (nameInput.value)
   profession.textContent = (jobInput.value)
-  // Получите значение полей jobInput и nameInput из свойства value
-
-  // Выберите элементы, куда должны быть вставлены значения полей
-
-  // Вставьте новые значения с помощью textContent
+  closePopup(evt)
 }
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+
 formElement.addEventListener('submit', formSubmitHandler);
+popUpOpenButton.addEventListener('click', openPopup)
+popUpCloseButton.addEventListener('click', closePopup)
+overlay.addEventListener('click', closePopup)
 

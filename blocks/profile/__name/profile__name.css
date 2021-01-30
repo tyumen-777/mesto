@@ -4,6 +4,9 @@
   line-height: 48px;
   margin-top: 22px;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 
