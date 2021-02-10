@@ -19,6 +19,8 @@
 @import url(../blocks/elements/__info/elements__info.css);
 @import url(../blocks/elements/__paragraph/elements__paragraph.css);
 @import url(../blocks/elements/__button-like/elements__button-like.css);
+@import url(../blocks/elements/__button-like/elements__button-like-active.css) ;
+@import url(../blocks/elements/__button-delete/elements__button-delete.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

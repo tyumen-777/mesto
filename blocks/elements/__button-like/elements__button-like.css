@@ -11,9 +11,7 @@
   transition: opacity 1s linear;
   outline: none;
 }
-.elements__button-like:active {
-  background: no-repeat center url("../../../images/likeButtonActive.svg");
-}
+
 .elements__button-like:hover {
   opacity: 0.5;
 }

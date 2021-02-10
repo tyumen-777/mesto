@@ -27,41 +27,7 @@
       </button>
     </section>
     <section class="elements">
-      <div class="elements__item">
-        <img src="./images/first_photo.jpg" alt="Карачаевск" class="elements__photo">
-        <h3 class="elements__paragraph">Карачаевск</h3>
-        <button class="elements__button-like" type="button"></button>
-      </div>
-      <div class="elements__item">
-        <img src="./images/second_photo.png" alt="Гора Эльбрус" class="elements__photo">
-        <h3 class="elements__paragraph">Гора Эльбрус</h3>
-        <button class="elements__button-like" type="button"></button>
 
-      </div>
-      <div class="elements__item">
-        <img src="./images/third_photo.png" alt="Домбай" class="elements__photo">
-        <h3 class="elements__paragraph">Домбай</h3>
-        <button class="elements__button-like" type="button"></button>
-
-      </div>
-      <div class="elements__item">
-        <img src="./images/fourth_photo.png" alt="Гора Эльбрус" class="elements__photo">
-        <h3 class="elements__paragraph">Гора Эльбрус</h3>
-        <button class="elements__button-like" type="button"></button>
-
-      </div>
-      <div class="elements__item">
-        <img src="./images/fifth_photo.png" alt="Домбай" class="elements__photo">
-        <h3 class="elements__paragraph">Домбай</h3>
-        <button class="elements__button-like" type="button"></button>
-
-      </div>
-      <div class="elements__item">
-        <img src="./images/six_photo.png" alt="Карачаево-Черкессия" class="elements__photo">
-        <h3 class="elements__paragraph">Карачаево-Черкессия</h3>
-        <button class="elements__button-like" type="button"></button>
-
-      </div>
     </section>
   </main>
   <footer class="footer">
@@ -86,8 +52,8 @@
       <button class="popup__button-close" type="button"></button>
       <h2 class="popup__heading">Новое место</h2>
       <form class="popup__input" name="popup">
-        <input type="text" class="popup__field popup__field_name" name="title" placeholder="Название" required>
-        <input type="text" class="popup__field popup__field_profession" name="link"
+        <input type="text" class="popup__field popup__field_title" name="title" placeholder="Название" required>
+        <input type="text" class="popup__field popup__field_link" name="link"
                placeholder="Ссылка на картинку" required>
         <button class="popup__button-save" type="submit">
           Создать
@@ -96,10 +62,11 @@
     </div>
   </div>
 </div>
-<template id="elements-template">
+<template class="elements-template">
   <div class="elements__item">
-    <img src="./images/first_photo.jpg" alt="Карачаевск" class="elements__photo">
-    <h3 class="elements__paragraph">Карачаевск</h3>
+    <img src="" alt="" class="elements__photo">
+    <button class="elements__button-delete" type="button"></button>
+    <h3 class="elements__paragraph"></h3>
     <button class="elements__button-like" type="button"></button>
   </div>
 </template>
