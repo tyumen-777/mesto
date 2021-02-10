@@ -15,7 +15,6 @@ const photoNameInput = photoPopup.querySelector('.popup__field_title') //
 const photoLinkInput = photoPopup.querySelector('.popup__field_link') //
 const photoEl = document.querySelector('.elements') // Секция фотокарточек
 const photoTemplate = document.querySelector('.elements-template')
-//const likeButton = photoTemplate.querySelector('.elements__button-like')
 const initialCards = [
   {
     name: 'Архыз',
@@ -58,19 +57,25 @@ function getEl(item) {
   imgEl.alt = item.name
   titleEl.textContent = item.name
 
-  //newEl.querySelector('.elements__button-like').addEventListener('click' , function (evt){
-    //evt.preventDefault();
-    const buttonLike = newEl.querySelector('.elements__button-like');
-    buttonLike.addEventListener('click' , (evt) => {
-      evt.target.classList.toggle('elements__button-like-active')
-    })
-  //})
+
+  const buttonLike = newEl.querySelector('.elements__button-like');
+  buttonLike.addEventListener('click', (evt) => {
+    evt.target.classList.toggle('elements__button-like-active')
+  }) // Функция лайка
 
 
-  return newEl
+  const removeButton = newEl.querySelector('.elements__button-delete');
+  removeButton.addEventListener('click' , buttonDelete); //Функция удаления
+
+  return newEl;
+}
+ function buttonDelete(event) {
+  const targetEl = event.target;
+  const targetItem = targetEl.closest('.card');
+  targetItem.remove();
 }
 
-render();
+
 
 
 const openPopup = (popupEl) => {
@@ -107,12 +112,11 @@ function addPhoto(evt) {
   const inputTitle = photoNameInput.value;
   const inputLink = photoLinkInput.value;
 
-  const photoItem = getEl({name: inputTitle , link: inputLink})
+  const photoItem = getEl({name: inputTitle, link: inputLink})
   photoEl.prepend(photoItem);
 
   photoNameInput.value = ''
   photoLinkInput.value = ''
-
 
 
   closePopup(photoPopup)
@@ -120,8 +124,8 @@ function addPhoto(evt) {
 } // Передаем значения из формы добавления фотографий
 
 
-
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', addPhoto);
 
-//console.log(likeButton)
+render();
+
