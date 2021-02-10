@@ -58,11 +58,13 @@ function getEl(item) {
   imgEl.alt = item.name
   titleEl.textContent = item.name
 
-  newEl.querySelector('.elements__button-like').addEventListener('click' , function (evt){
-    evt.preventDefault();
-    const buttonLike = document.querySelector('.elements__button-like');
-    buttonLike.classList.toggle('elements__button-like-active')
-  })
+  //newEl.querySelector('.elements__button-like').addEventListener('click' , function (evt){
+    //evt.preventDefault();
+    const buttonLike = newEl.querySelector('.elements__button-like');
+    buttonLike.addEventListener('click' , (evt) => {
+      evt.target.classList.toggle('elements__button-like-active')
+    })
+  //})
 
 
   return newEl
