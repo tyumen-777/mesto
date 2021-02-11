@@ -43,7 +43,7 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+console.log(popUpAddButton)
 function render() {
   const html = initialCards
     .map(getEl)
@@ -69,6 +69,13 @@ function getEl(item) {
   const removeButton = newEl.querySelector('.elements__button-delete');
   removeButton.addEventListener('click', buttonDelete); //Функция удаления
 
+  const openPhoto = newEl.querySelector('.elements__photo')
+    openPhoto.addEventListener('click' , () => {
+    openPopup(openImagePopup)
+
+  })
+
+
   return newEl;
 }
 
@@ -90,7 +97,9 @@ popUpEditButton.addEventListener('click', () => {
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
 }) // Открытие попапа по нажатию на клавишу редактировать
-
+// openPhoto.addEventListener('click' , () => {
+//   openPopup(openImagePopup)
+// })
 
 const closePopup = (popupEl) => {
   popupEl.classList.remove('popup__opened')

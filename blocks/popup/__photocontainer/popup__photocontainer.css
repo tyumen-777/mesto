@@ -1,6 +1,6 @@
 .popup__photocontainer {
-  width: 75vw;
-  height: 75vh;
+  max-width: 75vw;
+  max-height: 75vh;
   padding-bottom: 37px;
   background-color: #FFFFFF;
   border-radius: 10px;
