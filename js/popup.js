@@ -1,10 +1,12 @@
 //const overlay = document.querySelector('.popup') // Задний план
 const profilePopup = document.querySelector('.profilepopup') // Попап для редактирования информации профиля
 const photoPopup = document.querySelector('.photopopup') //  Попап для редактирования фотокарточек
+const openImagePopup = document.querySelector('.openedimage') // Попап открытой фотографии
 const popUpEditButton = document.querySelector('.profile__button-edit') // Клавиша редактирования профиля
 const popUpAddButton = document.querySelector('.profile__button-add') // Клавиша добавления фотографии
 const profileCloseButton = profilePopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в профиле
 const photoCloseButton = photoPopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в фото
+const openImageCloseButton = openImagePopup.querySelector('.popup__button-close') // Клавиша закрытия открытой фотографии
 const name = document.querySelector('.profile__name') // Ищем имя профиля на странице
 const profession = document.querySelector('.profile__profession') // Ищем профессию профился на странице
 const formElement = profilePopup.querySelector('.popup__input')// Форма для ввода информации о профиле
@@ -65,17 +67,16 @@ function getEl(item) {
 
 
   const removeButton = newEl.querySelector('.elements__button-delete');
-  removeButton.addEventListener('click' , buttonDelete); //Функция удаления
+  removeButton.addEventListener('click', buttonDelete); //Функция удаления
 
   return newEl;
 }
- function buttonDelete(event) {
+
+function buttonDelete(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.card');
   targetItem.remove();
 }
-
-
 
 
 const openPopup = (popupEl) => {
@@ -90,6 +91,7 @@ popUpEditButton.addEventListener('click', () => {
   jobInput.value = profession.textContent;
 }) // Открытие попапа по нажатию на клавишу редактировать
 
+
 const closePopup = (popupEl) => {
   popupEl.classList.remove('popup__opened')
 } // Функция закрытия попапа
@@ -99,6 +101,10 @@ profileCloseButton.addEventListener('click', () => {
 photoCloseButton.addEventListener('click', () => {
   closePopup(photoPopup)
 })
+openImageCloseButton.addEventListener('click', () => {
+  closePopup(openImagePopup)
+})
+
 
 function submitProfileForm(evt) {
   evt.preventDefault()
