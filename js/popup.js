@@ -61,14 +61,14 @@ function getEl(item) {
   titleEl.textContent = item.name
 
 
-  const buttonLike = newEl.querySelector('.elements__button-like');
-  buttonLike.addEventListener('click', (evt) => {
+  const likeButton = newEl.querySelector('.elements__button-like');
+  likeButton.addEventListener('click', (evt) => {
     evt.target.classList.toggle('elements__button-like-active')
   }) // Функция лайка
 
 
   const removeButton = newEl.querySelector('.elements__button-delete');
-  removeButton.addEventListener('click', buttonDelete); //Функция удаления
+  removeButton.addEventListener('click', deleteButton); //Функция удаления
 
 
   const imageLink = document.querySelector('.popup__image')
@@ -79,13 +79,13 @@ function getEl(item) {
     openPopup(openImagePopup)
     imageLink.src = imgEl.src
     titleLink.textContent = titleEl.textContent
-  })
+  }) // Открытие изображений
 
 
   return newEl;
 }
 
-function buttonDelete(event) {
+function deleteButton(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.card');
   targetItem.remove();
@@ -102,10 +102,7 @@ popUpEditButton.addEventListener('click', () => {
   openPopup(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
-}) // Открытие попапа по нажатию на клавишу редактировать
-// openPhoto.addEventListener('click' , () => {
-//   openPopup(openImagePopup)
-// })
+})
 
 const closePopup = (popupEl) => {
   popupEl.classList.remove('popup__opened')
@@ -136,8 +133,8 @@ function addPhoto(evt) {
   const photoItem = getEl({name: inputTitle, link: inputLink})
   photoEl.prepend(photoItem);
 
-  photoNameInput.value = ''
-  photoLinkInput.value = ''
+  photoNameInput.value.reset()
+  photoLinkInput.value.reset()
 
 
   closePopup(photoPopup)
