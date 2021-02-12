@@ -43,7 +43,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-console.log(popUpAddButton)
+
+
 function render() {
   const html = initialCards
     .map(getEl)
@@ -69,10 +70,15 @@ function getEl(item) {
   const removeButton = newEl.querySelector('.elements__button-delete');
   removeButton.addEventListener('click', buttonDelete); //Функция удаления
 
-  const openPhoto = newEl.querySelector('.elements__photo')
-    openPhoto.addEventListener('click' , () => {
-    openPopup(openImagePopup)
 
+  const imageLink = document.querySelector('.popup__image')
+  const titleLink = document.querySelector('.popup__phototitle')
+
+
+  imgEl.addEventListener('click', () => {
+    openPopup(openImagePopup)
+    imageLink.src = imgEl.src
+    titleLink.textContent = titleEl.textContent
   })
 
 
