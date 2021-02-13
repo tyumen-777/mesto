@@ -68,7 +68,7 @@ function getEl(item) {
 
 
   const removeButton = newEl.querySelector('.elements__button-delete');
-  removeButton.addEventListener('click', deleteButton); //Функция удаления
+  removeButton.addEventListener('click', handleCardDelete); //Функция удаления
 
 
   const imageLink = document.querySelector('.popup__image')
@@ -76,7 +76,7 @@ function getEl(item) {
 
 
   imgEl.addEventListener('click', () => {
-    openPopup(openImagePopup)
+    handlePopupOpen(openImagePopup)
     imageLink.src = imgEl.src
     titleLink.textContent = titleEl.textContent
   }) // Открытие изображений
@@ -85,36 +85,36 @@ function getEl(item) {
   return newEl;
 }
 
-function deleteButton(event) {
+function handleCardDelete(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.card');
   targetItem.remove();
 }
 
 
-const openPopup = (popupEl) => {
+const handlePopupOpen = (popupEl) => {
   popupEl.classList.add('popup__opened');
 } // Функция открытия попапа
 popUpAddButton.addEventListener('click', () => {
-  openPopup(photoPopup);
+  handlePopupOpen(photoPopup);
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
-  openPopup(profilePopup);
+  handlePopupOpen(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
 })
 
-const closePopup = (popupEl) => {
+const handlePopupClose = (popupEl) => {
   popupEl.classList.remove('popup__opened')
 } // Функция закрытия попапа
 profileCloseButton.addEventListener('click', () => {
-  closePopup(profilePopup)
+  handlePopupClose(profilePopup)
 })
 photoCloseButton.addEventListener('click', () => {
-  closePopup(photoPopup)
+  handlePopupClose(photoPopup)
 })
 openImageCloseButton.addEventListener('click', () => {
-  closePopup(openImagePopup)
+  handlePopupClose(openImagePopup)
 })
 
 
@@ -122,9 +122,9 @@ function submitProfileForm(evt) {
   evt.preventDefault()
   name.textContent = (nameInput.value)
   profession.textContent = (jobInput.value)
-  closePopup(profilePopup)
+  handlePopupClose(profilePopup)
 } // Передаем значения из формы на страницу
-function addPhoto(evt) {
+function submitPhotoAdd(evt) {
   evt.preventDefault()
 
   const inputTitle = photoNameInput.value;
@@ -133,17 +133,16 @@ function addPhoto(evt) {
   const photoItem = getEl({name: inputTitle, link: inputLink})
   photoEl.prepend(photoItem);
 
-  photoNameInput.value.reset()
-  photoLinkInput.value.reset()
+  formPhoto.reset()
 
 
-  closePopup(photoPopup)
+  handlePopupClose(photoPopup)
 
 } // Передаем значения из формы добавления фотографий
 
 
 formElement.addEventListener('submit', submitProfileForm);
-formPhoto.addEventListener('submit', addPhoto);
+formPhoto.addEventListener('submit', submitPhotoAdd);
 
 render();
 
