@@ -39,9 +39,11 @@
       <button class="popup__button-close" type="button"></button>
       <h2 class="popup__heading">Редактировать профиль</h2>
       <form class="popup__input" name="popup">
-        <input type="text" class="popup__field popup__field_name" name="name" value="Имя" placeholder="Имя" required>
-        <input type="text" class="popup__field popup__field_profession" name="profession" value="Профессия"
-               placeholder="Профессия" required>
+        <input id="name" type="text" class="popup__field popup__field_name" name="name" value="Имя" placeholder="Имя" required minlength="2" maxlength="40" novalidate>
+        <span class="popup__error popup__error-name">Вы пропустили это поле.</span>
+        <input id="profession" type="text" class="popup__field popup__field_profession" name="profession" value="Профессия"
+               placeholder="Профессия" required minlength="2" maxlength="200" novalidate>
+        <span class="popup__error popup__error-profession">Вы пропустили это поле.</span>
         <button class="popup__button-save" type="submit">
           Сохранить
         </button>
@@ -53,9 +55,11 @@
       <button class="popup__button-close" type="button"></button>
       <h2 class="popup__heading">Новое место</h2>
       <form class="popup__input" name="popup">
-        <input type="text" class="popup__field popup__field_title" name="title" placeholder="Название" required>
+        <input  type="text" class="popup__field popup__field_title" name="title" placeholder="Название" required minlength="2" maxlength="30">
+        <span class="popup__error">Вы пропустили это поле.</span>
         <input type="text" class="popup__field popup__field_link" name="link"
                placeholder="Ссылка на картинку" required>
+        <span class="popup__error">Введите адрес сайта.</span>
         <button class="popup__button-save" type="submit">
           Создать
         </button>
@@ -79,6 +83,7 @@
   </div>
 </template>
 <script src="js/popup.js"> </script>
+<script src="js/validate.js"> </script>
 </body>
 </html>
 
