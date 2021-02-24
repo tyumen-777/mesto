@@ -3,11 +3,9 @@
   font-size: 12px;
   line-height: 15px;
   color: #FF0000;
-  width: 164px;
-  height: 12px;
+  width: 362px;
   display: flex;
   margin-bottom: 13px;
-  visibility: hidden;
 }
 .popup__error:last-of-type {
   margin-bottom: 0;

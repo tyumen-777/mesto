@@ -151,10 +151,18 @@ function closeEsc(evt) {
   if (evt.key === "Escape") {
     closePopup(document.querySelector('.popup__opened'))
   }
+} // Закрываем форму по нажатию на клавишу ESC
+
+function closeOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target)
+  }
 }
 
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', addPhoto);
-overlay.addEventListener('click' , closePopup);
+profilePopup.addEventListener('mousedown' , closeOverlay);
+photoPopup.addEventListener('mousedown' , closeOverlay);
+openImagePopup.addEventListener('mousedown' , closeOverlay);
 render();
 
