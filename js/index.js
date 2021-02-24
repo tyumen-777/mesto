@@ -1,4 +1,4 @@
-//const overlay = document.querySelector('.popup') // Задний план
+const overlay = document.querySelector('.popup') // Задний план
 const profilePopup = document.querySelector('.profilepopup') // Попап для редактирования информации профиля
 const photoPopup = document.querySelector('.photopopup') //  Попап для редактирования фотокарточек
 const openImagePopup = document.querySelector('.openedimage') // Попап открытой фотографии
@@ -94,6 +94,7 @@ function handleCardDelete(event) {
 
 const handlePopupOpen = (popupEl) => {
   popupEl.classList.add('popup__opened');
+  document.addEventListener('keydown' , closeEsc)
 } // Функция открытия попапа
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
@@ -106,6 +107,7 @@ popUpEditButton.addEventListener('click', () => {
 
 const handlePopupClose = (popupEl) => {
   popupEl.classList.remove('popup__opened')
+  document.removeEventListener('keydown', closeEsc);
 } // Функция закрытия попапа
 profileCloseButton.addEventListener('click', () => {
   handlePopupClose(profilePopup)
@@ -140,9 +142,23 @@ function submitPhotoAdd(evt) {
 
 } // Передаем значения из формы добавления фотографий
 
+function closeEsc(evt) {
+  if (evt.key === "Escape") {
+    handlePopupClose(document.querySelector('.popup__opened'))
+  }
+} // Закрываем форму по нажатию на клавишу ESC
+
+function closeOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    handlePopupClose(evt.target)
+  }
+}
 
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoAdd);
+profilePopup.addEventListener('mousedown' , closeOverlay);
+photoPopup.addEventListener('mousedown' , closeOverlay);
+openImagePopup.addEventListener('mousedown' , closeOverlay);
 
 render();
 
