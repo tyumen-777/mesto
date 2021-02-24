@@ -44,6 +44,7 @@ const initialCards = [
   }
 ];
 
+
 function render() {
   const html = initialCards
     .map(getEl)
@@ -60,14 +61,14 @@ function getEl(item) {
   titleEl.textContent = item.name
 
 
-  const buttonLike = newEl.querySelector('.elements__button-like');
-  buttonLike.addEventListener('click', (evt) => {
+  const likeButton = newEl.querySelector('.elements__button-like');
+  likeButton.addEventListener('click', (evt) => {
     evt.target.classList.toggle('elements__button-like-active')
   }) // Функция лайка
 
 
   const removeButton = newEl.querySelector('.elements__button-delete');
-  removeButton.addEventListener('click', buttonDelete); //Функция удаления
+  removeButton.addEventListener('click', handleCardDelete); //Функция удаления
 
 
   const imageLink = document.querySelector('.popup__image')
@@ -75,52 +76,47 @@ function getEl(item) {
 
 
   imgEl.addEventListener('click', () => {
-    openPopup(openImagePopup)
+    handlePopupOpen(openImagePopup)
     imageLink.src = imgEl.src
     titleLink.textContent = titleEl.textContent
-  })
+  }) // Открытие изображений
 
 
   return newEl;
 }
 
-
-
-function buttonDelete(event) {
+function handleCardDelete(event) {
   const targetEl = event.target;
   const targetItem = targetEl.closest('.card');
   targetItem.remove();
 }
 
 
-const openPopup = (popupEl) => {
+const handlePopupOpen = (popupEl) => {
   popupEl.classList.add('popup__opened');
   document.addEventListener('keydown' , closeEsc)
 } // Функция открытия попапа
 popUpAddButton.addEventListener('click', () => {
-  openPopup(photoPopup);
+  handlePopupOpen(photoPopup);
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
-  openPopup(profilePopup);
+  handlePopupOpen(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
-}) // Открытие попапа по нажатию на клавишу редактировать
-// openPhoto.addEventListener('click' , () => {
-//   openPopup(openImagePopup)
-// })
+})
 
-const closePopup = (popupEl) => {
+const handlePopupClose = (popupEl) => {
   popupEl.classList.remove('popup__opened')
   document.removeEventListener('keydown', closeEsc);
 } // Функция закрытия попапа
 profileCloseButton.addEventListener('click', () => {
-  closePopup(profilePopup)
+  handlePopupClose(profilePopup)
 })
 photoCloseButton.addEventListener('click', () => {
-  closePopup(photoPopup)
+  handlePopupClose(photoPopup)
 })
 openImageCloseButton.addEventListener('click', () => {
-  closePopup(openImagePopup)
+  handlePopupClose(openImagePopup)
 })
 
 
@@ -128,9 +124,9 @@ function submitProfileForm(evt) {
   evt.preventDefault()
   name.textContent = (nameInput.value)
   profession.textContent = (jobInput.value)
-  closePopup(profilePopup)
+  handlePopupClose(profilePopup)
 } // Передаем значения из формы на страницу
-function addPhoto(evt) {
+function submitPhotoAdd(evt) {
   evt.preventDefault()
 
   const inputTitle = photoNameInput.value;
@@ -139,30 +135,30 @@ function addPhoto(evt) {
   const photoItem = getEl({name: inputTitle, link: inputLink})
   photoEl.prepend(photoItem);
 
-  photoNameInput.value = ''
-  photoLinkInput.value = ''
+  formPhoto.reset()
 
 
-  closePopup(photoPopup)
+  handlePopupClose(photoPopup)
 
 } // Передаем значения из формы добавления фотографий
 
 function closeEsc(evt) {
   if (evt.key === "Escape") {
-    closePopup(document.querySelector('.popup__opened'))
+    handlePopupClose(document.querySelector('.popup__opened'))
   }
 } // Закрываем форму по нажатию на клавишу ESC
 
 function closeOverlay(evt) {
   if (evt.target === evt.currentTarget) {
-    closePopup(evt.target)
+    handlePopupClose(evt.target)
   }
 }
 
 formElement.addEventListener('submit', submitProfileForm);
-formPhoto.addEventListener('submit', addPhoto);
+formPhoto.addEventListener('submit', submitPhotoAdd);
 profilePopup.addEventListener('mousedown' , closeOverlay);
 photoPopup.addEventListener('mousedown' , closeOverlay);
 openImagePopup.addEventListener('mousedown' , closeOverlay);
+
 render();
 
