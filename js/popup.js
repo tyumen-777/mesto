@@ -1,4 +1,4 @@
-const overlay = document.querySelector('.popup') // Задний план
+//const overlay = document.querySelector('.popup') // Задний план
 const profilePopup = document.querySelector('.profilepopup') // Попап для редактирования информации профиля
 const photoPopup = document.querySelector('.photopopup') //  Попап для редактирования фотокарточек
 const openImagePopup = document.querySelector('.openedimage') // Попап открытой фотографии

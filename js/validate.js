@@ -2,7 +2,7 @@ const validationForms = {
   formSelector: '.popup__input',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'form__submit_disabled',
+  inactiveButtonClass: 'popup__button-disabled',
   inputErrorClass: 'popup__field-invalid',
   errorClass: 'popup__error'
 };
