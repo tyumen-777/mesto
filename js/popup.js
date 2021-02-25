@@ -1,7 +1,7 @@
-//const overlay = document.querySelector('.popup') // Задний план
-const profilePopup = document.querySelector('.profilepopup') // Попап для редактирования информации профиля
-const photoPopup = document.querySelector('.photopopup') //  Попап для редактирования фотокарточек
-const openImagePopup = document.querySelector('.openedimage') // Попап открытой фотографии
+const overlay = document.querySelectorAll('.popup') // Задний план
+const profilePopup = document.querySelector('.profile-popup') // Попап для редактирования информации профиля
+const photoPopup = document.querySelector('.photo-popup') //  Попап для редактирования фотокарточек
+const openImagePopup = document.querySelector('.opened-image') // Попап открытой фотографии
 const popUpEditButton = document.querySelector('.profile__button-edit') // Клавиша редактирования профиля
 const popUpAddButton = document.querySelector('.profile__button-add') // Клавиша добавления фотографии
 const profileCloseButton = profilePopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в профиле
@@ -43,7 +43,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
+const imageLink = document.querySelector('.popup__image')
+const titleLink = document.querySelector('.popup__phototitle')
 
 function render() {
   const html = initialCards
@@ -71,8 +72,8 @@ function getEl(item) {
   removeButton.addEventListener('click', handleCardDelete); //Функция удаления
 
 
-  const imageLink = document.querySelector('.popup__image')
-  const titleLink = document.querySelector('.popup__phototitle')
+  // const imageLink = document.querySelector('.popup__image')
+  // const titleLink = document.querySelector('.popup__phototitle')
 
 
   imgEl.addEventListener('click', () => {
@@ -148,17 +149,21 @@ function closeEsc(evt) {
   }
 } // Закрываем форму по нажатию на клавишу ESC
 
-function closeOverlay(evt) {
-  if (evt.target === evt.currentTarget) {
-    handlePopupClose(evt.target)
-  }
-}
+
+overlay.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup__opened')) {
+      handlePopupClose(popup)
+    }
+    if (evt.target.classList.contains('popup__button-close')) {
+      handlePopupClose(popup)
+    }
+  })
+}) // Закрываем попап по overlay
 
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoAdd);
-profilePopup.addEventListener('mousedown' , closeOverlay);
-photoPopup.addEventListener('mousedown' , closeOverlay);
-openImagePopup.addEventListener('mousedown' , closeOverlay);
+
 
 render();
 
