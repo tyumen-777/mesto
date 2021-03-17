@@ -1,8 +1,9 @@
 export class Card {
-  constructor(item, cardSelector) {
-    this._name = item.title
+  constructor(item, cardSelector, handlePopupOpen) {
+    this._name = item.name
     this._link = item.link
     this._cardSelector = cardSelector
+    this._handlePopupOpen = handlePopupOpen
   }
   _getTemplate () {
     const cardElement = document
@@ -37,8 +38,8 @@ export class Card {
   }
 
   _openImage = () => {
-    imageLink.src = this._link
-    titleLink.textContent = this._name
-    handlePopupOpen(openImagePopup)
+    // imageLink.src = this._link
+    // titleLink.textContent = this._name
+    this._handlePopupOpen('')
   }
 }
