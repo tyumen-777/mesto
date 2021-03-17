@@ -1,3 +1,7 @@
+import {Card} from "./Card.js";
+
+
+
 const overlay = document.querySelectorAll('.popup') // Задний план
 const profilePopup = document.querySelector('.profile-popup') // Попап для редактирования информации профиля
 const photoPopup = document.querySelector('.photo-popup') //  Попап для редактирования фотокарточек
@@ -46,51 +50,53 @@ const initialCards = [
 const imageLink = document.querySelector('.popup__image')
 const titleLink = document.querySelector('.popup__phototitle')
 
-function render() {
-  const html = initialCards
-    .map(getEl)
-  photoEl.append(...html)
-}
+initialCards.forEach((item) => {
+  const card = new Card(item, '.elements-template' );
+  const cardElement = card.generateCard();
+  photoEl.append(cardElement)
+})
 
-function getEl(item) {
-  const newEl = photoTemplate.content.cloneNode(true)
-  const imgEl = newEl.querySelector('.elements__photo')
-  const titleEl = newEl.querySelector('.elements__paragraph')
+// function render() {
+//   const html = initialCards
+//     .map(getEl)
+//   photoEl.append(...html)
+// }
 
-  imgEl.src = item.link
-  imgEl.alt = item.name
-  titleEl.textContent = item.name
+// function getEl(item) {
+//   const newEl = photoTemplate.content.cloneNode(true)
+//   const imgEl = newEl.querySelector('.elements__photo')
+//   const titleEl = newEl.querySelector('.elements__paragraph')
+//
+//   imgEl.src = item.link
+//   imgEl.alt = item.name
+//   titleEl.textContent = item.name
+//
+//
+//   const likeButton = newEl.querySelector('.elements__button-like');
+//   likeButton.addEventListener('click', (evt) => {
+//     evt.target.classList.toggle('elements__button-like-active')
+//   }) // Функция лайка
+//
+//
+//   const removeButton = newEl.querySelector('.elements__button-delete');
+//   removeButton.addEventListener('click', handleCardDelete); //Функция удаления
+//
+//
+//   imgEl.addEventListener('click', () => {
+//     handlePopupOpen(openImagePopup)
+//     imageLink.src = imgEl.src
+//     titleLink.textContent = titleEl.textContent
+//   }) // Открытие изображений
+//
+//
+//   return newEl;
+// }
 
-
-  const likeButton = newEl.querySelector('.elements__button-like');
-  likeButton.addEventListener('click', (evt) => {
-    evt.target.classList.toggle('elements__button-like-active')
-  }) // Функция лайка
-
-
-  const removeButton = newEl.querySelector('.elements__button-delete');
-  removeButton.addEventListener('click', handleCardDelete); //Функция удаления
-
-
-  // const imageLink = document.querySelector('.popup__image')
-  // const titleLink = document.querySelector('.popup__phototitle')
-
-
-  imgEl.addEventListener('click', () => {
-    handlePopupOpen(openImagePopup)
-    imageLink.src = imgEl.src
-    titleLink.textContent = titleEl.textContent
-  }) // Открытие изображений
-
-
-  return newEl;
-}
-
-function handleCardDelete(event) {
-  const targetEl = event.target;
-  const targetItem = targetEl.closest('.card');
-  targetItem.remove();
-}
+// function handleCardDelete(event) {
+//   const targetEl = event.target;
+//   const targetItem = targetEl.closest('.card');
+//   targetItem.remove();
+// }
 
 
 const handlePopupOpen = (popupEl) => {
@@ -133,8 +139,12 @@ function submitPhotoAdd(evt) {
   const inputTitle = photoNameInput.value;
   const inputLink = photoLinkInput.value;
 
-  const photoItem = getEl({name: inputTitle, link: inputLink})
-  photoEl.prepend(photoItem);
+  const newCard = new Card({name: inputTitle, link: inputLink}, '.elements-template')
+  const newUserCard = newCard.generateCard();
+  photoEl.prepend(newUserCard);
+
+  // const photoItem = getEl({name: inputTitle, link: inputLink})
+  // photoEl.prepend(photoItem);
 
   formPhoto.reset()
 
@@ -165,5 +175,6 @@ formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoAdd);
 
 
-render();
+//render();
+
 
