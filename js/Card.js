@@ -1,9 +1,9 @@
 export class Card {
-  constructor(item, cardSelector, handlePopupOpen) {
+  constructor(item, cardSelector) {
     this._name = item.name
     this._link = item.link
     this._cardSelector = cardSelector
-    this._handlePopupOpen = handlePopupOpen
+    this._alt = item.name
   }
   _getTemplate () {
     const cardElement = document
@@ -16,7 +16,7 @@ export class Card {
   }
   generateCard () {
     this._element = this._getTemplate()
-    //this._photoElement = this._element.querySelector('.elements__photo')
+
     this._element.querySelector('.elements__paragraph').textContent = this._name; // Добавляем название
     this._element.querySelector('.elements__photo').src = this._link; // Добавляем ссылку
     this._element.querySelector('.elements__photo').alt = this._name; // Добавляем alt
@@ -38,8 +38,18 @@ export class Card {
   }
 
   _openImage = () => {
-    // imageLink.src = this._link
-    // titleLink.textContent = this._name
-    this._handlePopupOpen('')
+    imageLink.src = this._link;
+    imageLink.alt = this._alt;
+    titleLink.textContent = this._name;
+    handlePopupOpen(openImagePopup);
   }
 }
+
+const openImagePopup = document.querySelector('.opened-image')
+const imageLink = document.querySelector('.popup__image')
+const titleLink = document.querySelector('.popup__phototitle')
+
+const handlePopupOpen = (popupEl) => {
+  popupEl.classList.add('popup__opened');
+} // Функция открытия попапа
+

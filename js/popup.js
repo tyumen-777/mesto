@@ -126,6 +126,12 @@ openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)
 })
 
+function openImage (link, name) {
+  handlePopupOpen(openImagePopup)
+  imageLink.src = link
+  titleLink.textContent = name
+};
+
 
 function submitProfileForm(evt) {
   evt.preventDefault()
