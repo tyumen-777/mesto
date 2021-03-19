@@ -20,7 +20,7 @@ const jobInput = document.querySelector('.popup__field_profession')// Строк
 const photoNameInput = photoPopup.querySelector('.popup__field') //
 const photoLinkInput = photoPopup.querySelector('.popup__field_link') //
 const photoEl = document.querySelector('.elements') // Секция фотокарточек
-const photoTemplate = document.querySelector('.elements-template')
+//const photoTemplate = document.querySelector('.elements-template')
 const initialCards = [
   {
     name: 'Архыз',
@@ -47,8 +47,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const imageLink = document.querySelector('.popup__image')
-const titleLink = document.querySelector('.popup__phototitle')
+// const imageLink = document.querySelector('.popup__image')
+// const titleLink = document.querySelector('.popup__phototitle')
 
 initialCards.forEach((item) => {
   const card = new Card(item, '.elements-template' );
@@ -126,11 +126,11 @@ openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)
 })
 
-function openImage (link, name) {
-  handlePopupOpen(openImagePopup)
-  imageLink.src = link
-  titleLink.textContent = name
-};
+// function openImage (link, name) {
+//   handlePopupOpen(openImagePopup)
+//   imageLink.src = link
+//   titleLink.textContent = name
+// };
 
 
 function submitProfileForm(evt) {
