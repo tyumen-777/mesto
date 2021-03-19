@@ -67,6 +67,7 @@ const handlePopupOpen = (popupEl) => {
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
   photoValidattion.checkInputValidity();
+  formPhoto.reset()
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
   handlePopupOpen(profilePopup);
@@ -84,6 +85,7 @@ profileCloseButton.addEventListener('click', () => {
 }) //Закрытие попапа с редактированием профиля
 photoCloseButton.addEventListener('click', () => {
   handlePopupClose(photoPopup)
+  formPhoto.reset()
 })
 openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)
