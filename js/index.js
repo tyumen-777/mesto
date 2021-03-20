@@ -19,7 +19,7 @@ const jobInput = document.querySelector('.popup__field_profession')// Строк
 const photoNameInput = photoPopup.querySelector('.popup__field') //
 const photoLinkInput = photoPopup.querySelector('.popup__field_link') //
 const photoEl = document.querySelector('.elements') // Секция фотокарточек
-const errorInput = document.querySelector('.photo__input')
+//const errorInput = document.querySelector('.photo__input')
 const initialCards = [
   {
     name: 'Архыз',
@@ -69,7 +69,6 @@ const handlePopupOpen = (popupEl) => {
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
   photoValidattion.enableValidation();
-  errorInput.reset();
   //photoValidattion.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
