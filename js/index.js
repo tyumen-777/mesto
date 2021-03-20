@@ -69,14 +69,14 @@ const handlePopupOpen = (popupEl) => {
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
   photoValidattion.enableValidation();
-  //photoValidattion.clearValidation();
+  photoValidattion.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
   handlePopupOpen(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
   profileValidation.enableValidation();
-  //profileValidation.clearValidation()
+  profileValidation.clearValidation()
 })
 
 const handlePopupClose = (popupEl) => {
@@ -89,6 +89,7 @@ profileCloseButton.addEventListener('click', () => {
 }) //Закрытие попапа с редактированием профиля
 photoCloseButton.addEventListener('click', () => {
   handlePopupClose(photoPopup)
+  formPhoto.reset()
 })
 openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)

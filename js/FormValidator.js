@@ -20,8 +20,8 @@ export class FormValidator {
   }
 // Показываем ошибку о неправильном заполнении
   _hideInputError (inputElement) {
-    //this._errorElement = this._form.querySelector(`.${inputElement.id}-error`);
-    this._inputElement.classList.remove(this._inputErrorClass);
+    this._errorElement = this._form.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
     this._errorElement.textContent = "";
   } // Скрываем ошибку о неправильном заполнении
@@ -42,7 +42,7 @@ export class FormValidator {
     if (!this._inputElement.validity.valid) {
       this._showInputError()
     }else {
-      this._hideInputError()
+      this._hideInputError(inputElement)
     }
   } // Проверяем форму на валидность
   disabledSubmit () {
@@ -66,10 +66,10 @@ export class FormValidator {
       this._toggleButtonState()
     })
   }
-  // clearValidation () {
-  //   this._inputs.forEach((form) => {
-  //     this._hideInputError (form)
-  //   });
-  //   this._toggleButtonState()
-  // } // Доработка очистки полей ввода после закрытия
+  clearValidation () {
+    this._inputs.forEach((form) => {
+      this._hideInputError (form)
+    });
+    this._toggleButtonState()
+  } // Очистка полей ввода перед открытием
 }
