@@ -19,7 +19,8 @@ export class FormValidator {
     this._errorElement.textContent = this._inputElement.validationMessage;
   }
 // Показываем ошибку о неправильном заполнении
-  _hideInputError () {
+  _hideInputError (inputElement) {
+    //this._errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     this._inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
     this._errorElement.textContent = "";
@@ -54,13 +55,21 @@ export class FormValidator {
     }else {
       this._buttonElement.classList.remove(this._inactiveButtonClass)
       this._buttonElement.removeAttribute('disabled');
+
     }
   } // Отключаем блокировку клавиши
-  checkInputValidity () {
+
+  enableValidation () {
     this._setEventListeners()
     this._form.addEventListener("submit", (evt) => {
       evt.preventDefault()
       this._toggleButtonState()
     })
   }
+  // clearValidation () {
+  //   this._inputs.forEach((form) => {
+  //     this._hideInputError (form)
+  //   });
+  //   this._toggleButtonState()
+  // } // Доработка очистки полей ввода после закрытия
 }

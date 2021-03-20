@@ -19,6 +19,7 @@ const jobInput = document.querySelector('.popup__field_profession')// Строк
 const photoNameInput = photoPopup.querySelector('.popup__field') //
 const photoLinkInput = photoPopup.querySelector('.popup__field_link') //
 const photoEl = document.querySelector('.elements') // Секция фотокарточек
+const errorInput = document.querySelector('.photo__input')
 const initialCards = [
   {
     name: 'Архыз',
@@ -54,6 +55,7 @@ const validationForms = {
   errorClass: 'popup__error'
 };
 
+
 initialCards.forEach((item) => {
   const card = new Card(item, '.elements-template' );
   const cardElement = card.generateCard();
@@ -66,26 +68,28 @@ const handlePopupOpen = (popupEl) => {
 } // Функция открытия попапа
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
-  photoValidattion.checkInputValidity();
-  formPhoto.reset()
+  photoValidattion.enableValidation();
+  errorInput.reset();
+  //photoValidattion.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
   handlePopupOpen(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
-  profileValidation.checkInputValidity();
+  profileValidation.enableValidation();
+  //profileValidation.clearValidation()
 })
 
 const handlePopupClose = (popupEl) => {
   popupEl.classList.remove('popup__opened')
   document.removeEventListener('keydown', closeEsc);
+
 } // Функция закрытия попапа
 profileCloseButton.addEventListener('click', () => {
   handlePopupClose(profilePopup)
 }) //Закрытие попапа с редактированием профиля
 photoCloseButton.addEventListener('click', () => {
   handlePopupClose(photoPopup)
-  formPhoto.reset()
 })
 openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)
