@@ -68,15 +68,15 @@ const handlePopupOpen = (popupEl) => {
 } // Функция открытия попапа
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
-  photoValidattion.enableValidation();
+
   photoValidattion.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
   handlePopupOpen(profilePopup);
   nameInput.value = name.textContent;
   jobInput.value = profession.textContent;
-  profileValidation.enableValidation();
-  profileValidation.clearValidation()
+
+  profileValidation.clearValidation();
 })
 
 const handlePopupClose = (popupEl) => {
@@ -144,3 +144,6 @@ overlay.forEach((popup) => {
 
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoAdd);
+
+photoValidattion.enableValidation();
+profileValidation.enableValidation();
