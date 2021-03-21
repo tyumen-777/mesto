@@ -57,9 +57,9 @@ const validationForms = {
 
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.elements-template' );
-  const cardElement = card.generateCard();
-  photoEl.append(cardElement)
+  //const card = new Card(item, '.elements-template' );
+  //const cardElement = card.generateCard();
+  photoEl.append(createCard(item));
 })
 
 const handlePopupOpen = (popupEl) => {
@@ -69,7 +69,7 @@ const handlePopupOpen = (popupEl) => {
 popUpAddButton.addEventListener('click', () => {
   handlePopupOpen(photoPopup);
 
-  photoValidattion.clearValidation();
+  photoValidation.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
 popUpEditButton.addEventListener('click', () => {
   handlePopupOpen(profilePopup);
@@ -95,7 +95,7 @@ openImageCloseButton.addEventListener('click', () => {
   handlePopupClose(openImagePopup)
 })
 const profileValidation = new FormValidator(validationForms, formElement)
-const photoValidattion = new FormValidator(validationForms, formPhoto)
+const photoValidation = new FormValidator(validationForms, formPhoto)
 
 
 function submitProfileForm(evt) {
@@ -110,11 +110,12 @@ function submitPhotoAdd(evt) {
   const inputTitle = photoNameInput.value;
   const inputLink = photoLinkInput.value;
 
-  const newCard = new Card({name: inputTitle, link: inputLink}, '.elements-template')
-  const newUserCard = newCard.generateCard();
-  photoEl.prepend(newUserCard);
+  //const newCard = new Card({name: inputTitle, link: inputLink}, '.elements-template')
+  //const newUserCard = newCard.generateCard();
+  const photoItem = ({name: inputTitle, link: inputLink})
+  photoEl.prepend(createCard(photoItem));
 
-  // const photoItem = getEl({name: inputTitle, link: inputLink})
+
   // photoEl.prepend(photoItem);
 
   formPhoto.reset()
@@ -123,6 +124,11 @@ function submitPhotoAdd(evt) {
   handlePopupClose(photoPopup)
 
 } // Передаем значения из формы добавления фотографий
+function createCard(item) {
+  const newCard = new Card(item, '.elements-template')
+  const newUserCard = newCard.generateCard();
+  return newUserCard;
+} // Функция создания карточек
 
 function closeEsc(evt) {
   if (evt.key === "Escape") {
@@ -145,5 +151,5 @@ overlay.forEach((popup) => {
 formElement.addEventListener('submit', submitProfileForm);
 formPhoto.addEventListener('submit', submitPhotoAdd);
 
-photoValidattion.enableValidation();
+photoValidation.enableValidation();
 profileValidation.enableValidation();

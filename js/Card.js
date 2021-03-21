@@ -36,7 +36,7 @@ export class Card {
   _setEventListeners () {
     this._element.querySelector('.elements__button-delete').addEventListener('click', this._removeCard)
     this._element.querySelector('.elements__button-like').addEventListener('click', this._likeButton)
-    this._element.querySelector('.elements__photo').addEventListener('click', this._openImage)
+    this._imgElement.addEventListener('click', this._openImage)
   }
 
   _removeCard = () => {
