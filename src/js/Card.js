@@ -35,11 +35,11 @@ export default class Card {
     })
   }
 
-   _removeCard  ()  {
+   _removeCard = () => {
     this._element.remove();
 
   }
-  _likeButton  () {
+  _likeButton = () => {
     this._element.querySelector('.elements__button-like').classList.toggle('elements__button-like-active')
 
   }
