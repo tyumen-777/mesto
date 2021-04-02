@@ -7,6 +7,7 @@ export default class Card {
     this._link = item.link
     this._cardSelector = cardSelector
     this._handleCardClick = handleCardClick
+
   }
   _getTemplate () {
     const cardElement = document
@@ -23,24 +24,29 @@ export default class Card {
     this._element.querySelector('.elements__paragraph').textContent = this._name; // Добавляем название
     this._imgElement.src = this._link; // Добавляем ссылку
     this._imgElement.alt = this._name; // Добавляем alt
+    this._handleLike = this._element.querySelector('.elements__button-like') // Значок лайка
 
-    this._setEventListeners()
+      this._setEventListeners()
     return this._element
   }
   _setEventListeners () {
-    this._element.querySelector('.elements__button-delete').addEventListener('click', this._removeCard)
-    this._element.querySelector('.elements__button-like').addEventListener('click', this._likeButton)
+    this._element.querySelector('.elements__button-delete').addEventListener('click', () => {
+      this._removeCard()
+    })
+    this._handleLike.addEventListener('click',() => {
+      this._likeButton()
+    } )
     this._imgElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link)
     })
   }
 
-   _removeCard = () => {
+   _removeCard  () {
     this._element.remove();
 
   }
-  _likeButton = () => {
-    this._element.querySelector('.elements__button-like').classList.toggle('elements__button-like-active')
+  _likeButton () {
+    this._handleLike.classList.toggle('elements__button-like-active')
 
   }
 }

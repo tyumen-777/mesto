@@ -1,4 +1,6 @@
 import Popup from "./Popup.js";
+import {formPhoto} from "../utils/Constants.js";
+
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitForm) {
@@ -24,8 +26,10 @@ export default class PopupWithForm extends Popup {
     })
   }
 
-  closePopup() {
-    super.closePopup()
+  close() {
+    formPhoto.reset()
+
+    super.close()
 
   }
 }

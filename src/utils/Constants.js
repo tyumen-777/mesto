@@ -10,6 +10,7 @@ const profileSelectors = {
   profileName: '.profile__name',
   profileProfession: '.profile__profession'
 }
+const cardTemplate = '.elements-template' // Template карточки
 const overlay = document.querySelectorAll('.popup') // Задний план
 const profilePopup = document.querySelector('.profile-popup') // Попап для редактирования информации профиля
 const profilePopupSelector = '.profile-popup';
@@ -65,6 +66,7 @@ const initialCards = [
 ];
 
 export {
+  cardTemplate,
   profilePopupSelector,
   profileSelectors,
   popUpEditButtonSelector,
