@@ -1,21 +1,21 @@
 import Popup from "./Popup.js";
-import {formPhoto} from "../utils/Constants.js";
-
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitForm) {
     super(popupSelector)
     this._submitForm = submitForm
-
   }
 
   _getInputValues() {
-    this._popupForm = this._popup.querySelectorAll('.popup__input')
+    this._popupForm = this._popup.querySelectorAll('.popup__field')
+
     this._inputValues = {};
-    this._popupForm.forEach(item => {
-      this._inputValues[item.name] = item.value
+    this._popupForm.forEach(input => {
+      this._inputValues[input.name] = input.value
     })
-    return this._inputValues
+    return this._inputValues;
+
+
   }
 
   setEventListeners() {
@@ -23,13 +23,14 @@ export default class PopupWithForm extends Popup {
     this._popup.addEventListener('submit', (event) => {
       event.preventDefault()
       this._submitForm(this._getInputValues())
+      //console.log(this._getInputValues())
+      this.close()
     })
   }
 
   close() {
-    formPhoto.reset()
-
+    this._popup.querySelector('.popup__input').reset()
     super.close()
-
   }
+
 }

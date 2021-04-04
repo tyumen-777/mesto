@@ -28,18 +28,23 @@ import {
   photoEl,
   initialCards
 } from "../utils/Constants.js"
+import {info} from "autoprefixer";
 
-
-const profilePopupEdit = new PopupWithForm(profilePopupSelector, submitProfileForm);
+const profilePopupEdit = new PopupWithForm(profilePopupSelector, (info) => userInfo.setUserInfo(info)
+);
 profilePopupEdit.setEventListeners()
 
+
+const photoPopupAdd = new PopupWithForm(photoPopupSelector, (info) => {
+  const newPhoto = createCard(info)
+
+  cardList.addPhoto(newPhoto)
+});
+photoPopupAdd.setEventListeners()
 
 const popupWithImage = new PopupWithImage(openImageSelector, popupImage, popupImageTitle)
 popupWithImage.setEventListeners()
 
-
-const photoPopupAdd = new PopupWithForm(photoPopupSelector, submitPhotoAdd);
-photoPopupAdd.setEventListeners()
 
 const profileValidation = new FormValidator(validationForms, formElement) // Включаем валидацию формы профиля
 const photoValidation = new FormValidator(validationForms, formPhoto) // Включаем валидацию формы добавления фотографии
@@ -50,30 +55,21 @@ function createCard(item) {
       popupWithImage.open(name, link)
     }
   })
+
   const newUserCard = newCard.generateCard();
+  console.log(item)
   return newUserCard;
 } // Функция создания карточек
 
 const cardList = new Section({
   items: initialCards,
   renderer: (cardItem) => {
-    const newCard =  createCard(cardItem)
-
+    const newCard = createCard(cardItem)
     cardList.addItem(newCard);
-
   }
-  //   const newCard = new Card(cardItem, cardTemplate, {
-  //     handleCardClick: (name, link) => {
-  //       popupWithImage.open(name, link)
-  //     }
-  //   });
-  //   const cardElement = newCard.generateCard();
-  //   cardList.addItem(cardElement);
-  // }
+
 }, photoElSelector); // Отрисовка карточек при загрузке страницы
 cardList.renderItems();
-
-
 
 
 popUpAddButton.addEventListener('click', () => {
@@ -90,36 +86,6 @@ popUpEditButton.addEventListener('click', () => {
   profileValidation.clearValidation();
 }) // Открытие попапа реадктирования профиля
 
-
-
-function submitProfileForm() {
-
-  const info = {
-    name: nameInput.value,
-    profession: jobInput.value
-  }
-  userInfo.setUserInfo(info)
-
-  profilePopupEdit.close()
-} // Передаем значения из формы на страницу
-function submitPhotoAdd() {
-
-  const inputTitle = photoNameInput.value;
-  const inputLink = photoLinkInput.value;
-
-  const photoItem = ({name: inputTitle, link: inputLink})
-  photoEl.prepend(createCard(photoItem));
-
-  formPhoto.reset()
-  photoPopupAdd.close()
-} // Передаем значения из формы добавления фотографий
-
-
-
-
-
-
-formElement.addEventListener('submit', submitProfileForm);
 
 photoValidation.enableValidation();
 profileValidation.enableValidation();

@@ -8,6 +8,9 @@ export default class Section {
   addItem(element) {
     this._container.append(element)
   }
+  addPhoto(element) {
+    this._container.prepend(element)
+  } // Метод добавления новой карточки
   renderItems() {
     this._renderedItems.forEach(item => this._renderer(item))
   }
