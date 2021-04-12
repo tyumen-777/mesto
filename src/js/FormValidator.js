@@ -7,6 +7,7 @@ export class FormValidator {
     this._errorClass = validationConfig.errorClass
     this._form = form
     this._inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+
   }
   _hasInvalidInput () {
     return this._inputs.some((inputElement) => {

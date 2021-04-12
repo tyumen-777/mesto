@@ -18,19 +18,29 @@ const photoPopup = document.querySelector('.photo-popup') //  Попап для 
 const photoPopupSelector = '.photo-popup'
 const openImagePopup = document.querySelector('.opened-image') // Попап открытой фотографии
 const openImageSelector = '.opened-image'
+const updateAvatarPopup = document.querySelector('.update-avatar') // Попап редактирования аватара
+const updateAvatarPopupSelector = '.update-avatar'
+
 const popupImage = '.popup__image'
 const popupImageTitle = '.popup__phototitle'
 const popupButtonClose = '.popup__button-close'
 const popUpEditButton = document.querySelector('.profile__button-edit') // Клавиша редактирования профиля
 const popUpEditButtonSelector = '.profile__button-edit'
+const updateImageButton = document.querySelector('.profile__avatar-edit') // Клавиша редактирования аватара
+const updateImageButtonSelector = '.profile__avatar-edit'
 const popUpAddButton = document.querySelector('.profile__button-add') // Клавиша добавления фотографии
 const profileCloseButton = profilePopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в профиле
 const photoCloseButton = photoPopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в фото
 const openImageCloseButton = openImagePopup.querySelector('.popup__button-close') // Клавиша закрытия открытой фотографии
-const name = document.querySelector('.profile__name') // Ищем имя профиля на странице
-const profession = document.querySelector('.profile__profession') // Ищем профессию профился на странице
+const name = document.querySelector(profileSelectors.profileName) // Ищем имя профиля на странице
+const profession = document.querySelector(profileSelectors.profileProfession) // Ищем профессию профился на странице
 const formElement = profilePopup.querySelector('.popup__input')// Форма для ввода информации о профиле
 const formPhoto = photoPopup.querySelector('.popup__input') // Форма для сохранения фотографий
+
+const profileAvatar = document.querySelector('.profile__avatar') // Ищем аватар на странице
+const formAvatar = updateAvatarPopup.querySelector('.popup__input') // Форма для обновления аватара
+const profileAvatarInput = updateAvatarPopup.querySelector('.popup__avatar_link') // Строка для ввода ссылки на аватар
+
 const nameInput = document.querySelector('.popup__field_name') // Строка для ввода имени профиля
 const jobInput = document.querySelector('.popup__field_profession')// Строка для ввода професии профиля
 const photoNameInput = photoPopup.querySelector('.popup__field') //
@@ -66,6 +76,13 @@ const initialCards = [
 ];
 
 export {
+  profileAvatarInput,
+  profileAvatar,
+  formAvatar,
+  updateAvatarPopupSelector,
+  updateAvatarPopup,
+  updateImageButton,
+  updateImageButtonSelector,
   cardTemplate,
   profilePopupSelector,
   profileSelectors,
