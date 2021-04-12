@@ -1,0 +1,14 @@
+.profile__avatar-edit {
+  width: 26px;
+  height: 26px;
+  background: no-repeat center url("../../../images/editPhotobutton.svg");
+  border: 0;
+  padding: 0;
+  background-size: 100%;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  left: 45px;
+  display: none;
+}
+
