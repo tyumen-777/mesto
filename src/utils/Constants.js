@@ -41,7 +41,7 @@ const formPhoto = photoPopup.querySelector('.popup__input') // Форма для
 
 const profileAvatar = document.querySelector('.profile__avatar') // Ищем аватар на странице
 const formAvatar = updateAvatarPopup.querySelector('.popup__input') // Форма для обновления аватара
-const profileAvatarInput = updateAvatarPopup.querySelector('.popup__avatar_link') // Строка для ввода ссылки на аватар
+const profileAvatarInput = updateAvatarPopup.querySelector('.popup__avatar-link') // Строка для ввода ссылки на аватар
 
 const nameInput = document.querySelector('.popup__field_name') // Строка для ввода имени профиля
 const jobInput = document.querySelector('.popup__field_profession')// Строка для ввода професии профиля
