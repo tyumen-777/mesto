@@ -49,9 +49,7 @@
                value="Профессия"
                placeholder="Профессия" required minlength="2" maxlength="200">
         <span class="form-profession-input-error"></span>
-        <button class="popup__button-save" type="submit">
-          Сохранить
-        </button>
+        <button class="popup__button-save" type="submit" value="Сохранить">Сохранить</button>
       </form>
     </div>
   </div>
@@ -66,9 +64,9 @@
         <input type="url" class="popup__field popup__field_link" id="form-link-input" name="link"
                placeholder="Ссылка на картинку" required>
         <span class="form-link-input-error"></span>
-        <button class="popup__button-save" type="submit">
-          Создать
-        </button>
+        <button class="popup__button-save" type="submit" value="Создать">Создать</button>
+
+
       </form>
     </div>
   </div>
@@ -83,9 +81,10 @@
     <div class="popup__container">
       <button class="popup__button-close" type="button"></button>
       <h2 class="popup__heading">Вы уверены?
-        <button class="popup__button-save" type="submit">
-          Да
-        </button>
+        <form class="popup__input" name="popup" novalidate>
+          <input class="popup__button-save" type="submit" value="Да" name="submit">
+        </form>
+
       </h2>
     </div>
   </div>
@@ -97,9 +96,9 @@
         <input type="url" class="popup__field popup__avatar_link" id="form-avatar-input" name="link"
                placeholder="Ссылка на аватар" required>
         <span class="form-avatar-input-error"></span>
-        <button class="popup__button-save" type="submit">
-          Сохранить
-        </button>
+        <button class="popup__button-save" type="submit" value="Сохранить">Сохранить</button>
+
+
       </form>
     </div>
   </div>

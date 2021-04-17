@@ -4,10 +4,13 @@ import Api from "../js/Api.js"
 import {FormValidator} from "../js/FormValidator.js";
 import PopupWithImage from "../js/PopupWithImage.js";
 import PopupWithForm from "../js/PopupWithForm.js";
+import PopupWithSubmit from "../js/PopupWithSubmit.js";
 import Section from "../js/Section.js";
 import UserInfo from "../js/UserInfo.js";
 import {validationForms} from "../utils/Constants.js";
 import {
+  popupDeleteConfirm,
+  userId,
   profileAvatarInput,
   profileAvatar,
   name,
@@ -51,20 +54,31 @@ api.getUserInfo().then((data => {
   profileAvatar.src = data.avatar;
 })) // Получаем данные пользователя с сервера
 
+
 const profilePopupEdit = new PopupWithForm(profilePopupSelector, (info) => {
+  profilePopupEdit.renderLoading(true)
   api.editUserInfo(info.name, info.profession)
     .finally(() => {
-      userInfo.setUserInfo(info)})
+      userInfo.setUserInfo(info)
+      profilePopupEdit.renderLoading(false)
+    })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
     });
+});
 profilePopupEdit.setEventListeners() // Попапа редактирования информации о пользователе
 
 
 const photoPopupAdd = new PopupWithForm(photoPopupSelector, (info) => {
+  photoPopupAdd.renderLoading(true)
   api.addCard(info.name, info.link)
     .then(info => {
-  const newPhoto = createCard(info)
-  cardList.addPhoto(newPhoto)
-})
+      const newPhoto = createCard(info)
+      cardList.addPhoto(newPhoto)
+      photoPopupAdd.renderLoading(false)
+    }).catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 });
 photoPopupAdd.setEventListeners() // Попап добавления фотографии
 
@@ -72,16 +86,23 @@ const popupWithImage = new PopupWithImage(openImageSelector, popupImage, popupIm
 popupWithImage.setEventListeners() // Попап открытой фотографии
 
 const popUpEditAvatar = new PopupWithForm(updateAvatarPopupSelector, () => {
-
+  popUpEditAvatar.renderLoading(true)
   profileAvatar.src = profileAvatarInput.value
-    console.log(profileAvatarInput.value)
+
   api.editUserAvatar(profileAvatarInput.value)
     .finally(() => {
-
-    })
+      popUpEditAvatar.renderLoading(false)
+    }).catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
 
 });
 popUpEditAvatar.setEventListeners(); // Попап редактирования аватара
+
+const popUpDeleteConfirm = new PopupWithSubmit(popupDeleteConfirm, (evt, card) => {
+  deleteConfirm(evt, card)
+})
+popUpDeleteConfirm.setEventListeners()
 
 const profileValidation = new FormValidator(validationForms, formElement) // Включаем валидацию формы профиля
 const photoValidation = new FormValidator(validationForms, formPhoto) // Включаем валидацию формы добавления фотографии
@@ -95,25 +116,39 @@ function createCard(item) {
   const newCard = new Card(item, cardTemplate, {
     handleCardClick: (name, link) => {
       popupWithImage.open(name, link)
+    }, likeCardHandler: () => {
+      const likedCard = newCard.likedCard();
+      const resultApi = likedCard ? api.dislikeCard(newCard.getIdCard()) : api.likeCard(newCard.getIdCard());
+
+      resultApi.then(data => {
+        newCard.setLikes(data.likes);
+        newCard.renderLikes()
+
+      }).catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      })
+    }, deleteCardHandler: () => {
+      popUpDeleteConfirm.open(newCard)
+
     }
-  })
+  }, userId, item._id)
+
+
   const newUserCard = newCard.generateCard();
   return newUserCard;
 } // Генерация изначальных карточек
 
-// const generate = (item) => {
-  const cardList = new Section({
-    //items: initialCards,
-    renderer: (cardItem) => {
-      const newCard = createCard(cardItem)
-      cardList.addItem(newCard);
-    }
-  }, photoElSelector); // Отрисовка карточек при загрузке страницы
-  //cardList.renderItems();
-  //console.log(item)
-// }
+
+const cardList = new Section({
+  renderer: (cardItem) => {
+    const newCard = createCard(cardItem)
+    cardList.addItem(newCard);
+  }
+}, photoElSelector); // Отрисовка карточек при загрузке страницы
+
 
 popUpAddButton.addEventListener('click', () => {
+
   photoPopupAdd.open()
   photoValidation.clearValidation();
 }) // Открытие попапа по нажатию на клавишу добавить
@@ -121,15 +156,24 @@ popUpAddButton.addEventListener('click', () => {
 const userInfo = new UserInfo(profileSelectors)
 popUpEditButton.addEventListener('click', () => {
   profilePopupEdit.open();
+
   const currentInfo = userInfo.getUserInfo()
   nameInput.value = currentInfo.name
   jobInput.value = currentInfo.profession
   profileValidation.clearValidation();
 }) // Открытие попапа реадктирования профиля
 
-
-
-
+const deleteConfirm = (evt, newCard) => {
+  evt.preventDefault();
+  api.removeCard(newCard.getIdCard())
+    .then(response => {
+      newCard.removeCard()
+    }).finally(() => {
+    popUpDeleteConfirm.close()
+  }).catch((err) => {
+    console.log(err); // выведем ошибку в консоль
+  });
+}
 
 
 updateImageButton.addEventListener('click', () => {
@@ -141,6 +185,4 @@ photoValidation.enableValidation();
 profileValidation.enableValidation();
 avatarUpdateValidation.enableValidation()
 
-console.log()
-console.log()
 

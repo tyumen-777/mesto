@@ -10,6 +10,7 @@ const profileSelectors = {
   profileName: '.profile__name',
   profileProfession: '.profile__profession'
 }
+const userId = '4156295406ebf39b1d98f0bc';
 const cardTemplate = '.elements-template' // Template карточки
 const overlay = document.querySelectorAll('.popup') // Задний план
 const profilePopup = document.querySelector('.profile-popup') // Попап для редактирования информации профиля
@@ -28,6 +29,7 @@ const popUpEditButton = document.querySelector('.profile__button-edit') // Кл�
 const popUpEditButtonSelector = '.profile__button-edit'
 const updateImageButton = document.querySelector('.profile__avatar-edit') // Клавиша редактирования аватара
 const updateImageButtonSelector = '.profile__avatar-edit'
+const popupDeleteConfirm = '.photo-delete' // Попапа подтверждения удаления карточки
 const popUpAddButton = document.querySelector('.profile__button-add') // Клавиша добавления фотографии
 const profileCloseButton = profilePopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в профиле
 const photoCloseButton = photoPopup.querySelector('.popup__button-close') // Клавиша закрытия попапа в фото
@@ -76,6 +78,8 @@ const initialCards = [
 ];
 
 export {
+  popupDeleteConfirm,
+  userId,
   profileAvatarInput,
   profileAvatar,
   formAvatar,
