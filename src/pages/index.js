@@ -41,25 +41,47 @@ import {
   photoEl,
   initialCards
 } from "../utils/Constants.js"
-import {info} from "autoprefixer";
+import {data, info} from "autoprefixer";
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-22',
-  token: 'ed089852-ab21-42a0-b909-11eeabdb931a',
+  headers: {
+    authorization: 'ed089852-ab21-42a0-b909-11eeabdb931a',
+    'Content-type': 'application/json'
+  }
 })
 
-api.getUserInfo().then((data => {
-  name.textContent = data.name
-  profession.textContent = data.about;
-  profileAvatar.src = data.avatar;
-})) // Получаем данные пользователя с сервера
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, item]) => {
+    userInfo.setUserInfo(data);
+    cardList.renderItems(item)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
+// api.getUserInfo().then((data => {
+//   userInfo.setUserInfo(data)
+//   // name.textContent = data.name
+//   // profession.textContent = data.about;
+//   // profileAvatar.src = data.avatar;
+// })).catch((err) => {
+//   console.log(err); // выведем ошибку в консоль
+// }); // Получаем данные пользователя с сервера
+//
+// api.getInitialCards().then((item) => {
+//   cardList.renderItems(item)
+// }) // Получение карточек с сервера
 
 
 const profilePopupEdit = new PopupWithForm(profilePopupSelector, (info) => {
   profilePopupEdit.renderLoading(true)
-  api.editUserInfo(info.name, info.profession)
-    .finally(() => {
+  api.editUserInfo(info.name, info.about)
+    .then(() => {
       userInfo.setUserInfo(info)
+      profilePopupEdit.close()
+    })
+    .finally(() => {
       profilePopupEdit.renderLoading(false)
     })
     .catch((err) => {
@@ -75,10 +97,13 @@ const photoPopupAdd = new PopupWithForm(photoPopupSelector, (info) => {
     .then(info => {
       const newPhoto = createCard(info)
       cardList.addPhoto(newPhoto)
-      photoPopupAdd.renderLoading(false)
-    }).catch((err) => {
-    console.log(err); // выведем ошибку в консоль
-  });
+      photoPopupAdd.close()
+    }).finally(() => {
+    photoPopupAdd.renderLoading(false)
+  })
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
 });
 photoPopupAdd.setEventListeners() // Попап добавления фотографии
 
@@ -87,9 +112,13 @@ popupWithImage.setEventListeners() // Попап открытой фотогра
 
 const popUpEditAvatar = new PopupWithForm(updateAvatarPopupSelector, () => {
   popUpEditAvatar.renderLoading(true)
-  profileAvatar.src = profileAvatarInput.value
+  //profileAvatar.src = profileAvatarInput.value
 
   api.editUserAvatar(profileAvatarInput.value)
+    .then((res) => {
+      userInfo.setUserInfo(res)
+      popUpEditAvatar.close()
+    })
     .finally(() => {
       popUpEditAvatar.renderLoading(false)
     }).catch((err) => {
@@ -108,9 +137,6 @@ const profileValidation = new FormValidator(validationForms, formElement) // В�
 const photoValidation = new FormValidator(validationForms, formPhoto) // Включаем валидацию формы добавления фотографии
 const avatarUpdateValidation = new FormValidator(validationForms, formAvatar) // Включаем валидацию формы обновления аватара
 
-api.getInitialCards().then((item) => {
-  cardList.renderItems(item)
-}) // Получение карточек с сервера
 
 function createCard(item) {
   const newCard = new Card(item, cardTemplate, {
@@ -159,8 +185,9 @@ popUpEditButton.addEventListener('click', () => {
 
   const currentInfo = userInfo.getUserInfo()
   nameInput.value = currentInfo.name
-  jobInput.value = currentInfo.profession
+  jobInput.value = currentInfo.about
   profileValidation.clearValidation();
+
 }) // Открытие попапа реадктирования профиля
 
 const deleteConfirm = (evt, newCard) => {
@@ -168,9 +195,8 @@ const deleteConfirm = (evt, newCard) => {
   api.removeCard(newCard.getIdCard())
     .then(response => {
       newCard.removeCard()
-    }).finally(() => {
-    popUpDeleteConfirm.close()
-  }).catch((err) => {
+      popUpDeleteConfirm.close()
+    }).catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
 }

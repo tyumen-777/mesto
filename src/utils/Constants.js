@@ -8,7 +8,8 @@ export const validationForms = {
 };
 const profileSelectors = {
   profileName: '.profile__name',
-  profileProfession: '.profile__profession'
+  profileProfession: '.profile__profession',
+  profileAvatar: '.profile__avatar'
 }
 const userId = '4156295406ebf39b1d98f0bc';
 const cardTemplate = '.elements-template' // Template карточки
@@ -45,6 +46,7 @@ const profileAvatarInput = updateAvatarPopup.querySelector('.popup__avatar-link'
 
 const nameInput = document.querySelector('.popup__field_name') // Строка для ввода имени профиля
 const jobInput = document.querySelector('.popup__field_profession')// Строка для ввода професии профиля
+
 const photoNameInput = photoPopup.querySelector('.popup__field') //
 const photoLinkInput = photoPopup.querySelector('.popup__field_link') //
 const photoEl = document.querySelector('.elements') // Секция фотокарточек

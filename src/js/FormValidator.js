@@ -68,8 +68,8 @@ export class FormValidator {
     })
   }
   clearValidation () {
-    this._inputs.forEach((form) => {
-      this._hideInputError (form)
+    this._inputs.forEach((input) => {
+      this._hideInputError (input)
     });
     this._toggleButtonState()
   } // Очистка полей ввода перед открытием

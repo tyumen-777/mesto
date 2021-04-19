@@ -4,14 +4,14 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, submitForm) {
     super(popupSelector)
     this._submitForm = submitForm;
-    this._popupForm = this._popup.querySelectorAll('.popup__field');
+    this._inputList = this._popup.querySelectorAll('.popup__field');
     this._popupSubmitButton = this._popup.querySelector('.popup__button-save');
     this._defaultSubmitButtonText = this._popupSubmitButton.textContent;
   }
 
   _getInputValues() {
     this._inputValues = {};
-    this._popupForm.forEach(input => {
+    this._inputList.forEach(input => {
       this._inputValues[input.name] = input.value
     })
     return this._inputValues;
@@ -24,9 +24,6 @@ export default class PopupWithForm extends Popup {
       this._submitForm(this._getInputValues())
       this.close()
     })
-  }
-  open() {
-    super.open();
   }
 
   close() {
