@@ -1,12 +1,12 @@
 import './index.css'
-import Card from "../js/Card.js";
-import Api from "../js/Api.js"
-import {FormValidator} from "../js/FormValidator.js";
-import PopupWithImage from "../js/PopupWithImage.js";
-import PopupWithForm from "../js/PopupWithForm.js";
-import PopupWithSubmit from "../js/PopupWithSubmit.js";
-import Section from "../js/Section.js";
-import UserInfo from "../js/UserInfo.js";
+import Card from "../components/Card.js";
+import Api from "../components/Api.js"
+import {FormValidator} from "../components/FormValidator.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 import {validationForms} from "../utils/constants.js";
 import {
   popupDeleteConfirm,
@@ -79,12 +79,10 @@ const profilePopupEdit = new PopupWithForm(profilePopupSelector, (info) => {
   api.editUserInfo(info.name, info.about)
     .then(() => {
       userInfo.setUserInfo(info)
-
+      profilePopupEdit.close()
     })
     .finally(() => {
-      profilePopupEdit.close()
       profilePopupEdit.renderLoading(false)
-
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -99,9 +97,8 @@ const photoPopupAdd = new PopupWithForm(photoPopupSelector, (info) => {
     .then(info => {
       const newPhoto = createCard(info)
       cardList.addPhoto(newPhoto)
-
+      photoPopupAdd.close()
     }).finally(() => {
-    photoPopupAdd.close()
     photoPopupAdd.renderLoading(false)
   })
     .catch((err) => {
@@ -120,10 +117,9 @@ const popUpEditAvatar = new PopupWithForm(updateAvatarPopupSelector, () => {
   api.editUserAvatar(profileAvatarInput.value)
     .then((res) => {
       userInfo.setUserInfo(res)
-
+      popUpEditAvatar.close()
     })
     .finally(() => {
-      popUpEditAvatar.close()
       popUpEditAvatar.renderLoading(false)
     }).catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -199,10 +195,8 @@ const deleteConfirm = (evt, newCard) => {
   api.removeCard(newCard.getIdCard())
     .then(response => {
       newCard.removeCard()
-
-    }).finally(() => {
-    popUpDeleteConfirm.close()
-  })
+      popUpDeleteConfirm.close()
+    })
     .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
