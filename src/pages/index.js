@@ -7,7 +7,7 @@ import PopupWithForm from "../js/PopupWithForm.js";
 import PopupWithSubmit from "../js/PopupWithSubmit.js";
 import Section from "../js/Section.js";
 import UserInfo from "../js/UserInfo.js";
-import {validationForms} from "../utils/Constants.js";
+import {validationForms} from "../utils/constants.js";
 import {
   popupDeleteConfirm,
   userId,
@@ -40,7 +40,7 @@ import {
   photoLinkInput,
   photoEl,
   initialCards
-} from "../utils/Constants.js"
+} from "../utils/constants.js"
 import {data, info} from "autoprefixer";
 
 const api = new Api({
@@ -79,10 +79,12 @@ const profilePopupEdit = new PopupWithForm(profilePopupSelector, (info) => {
   api.editUserInfo(info.name, info.about)
     .then(() => {
       userInfo.setUserInfo(info)
-      profilePopupEdit.close()
+
     })
     .finally(() => {
+      profilePopupEdit.close()
       profilePopupEdit.renderLoading(false)
+
     })
     .catch((err) => {
       console.log(err); // выведем ошибку в консоль
@@ -97,8 +99,9 @@ const photoPopupAdd = new PopupWithForm(photoPopupSelector, (info) => {
     .then(info => {
       const newPhoto = createCard(info)
       cardList.addPhoto(newPhoto)
-      photoPopupAdd.close()
+
     }).finally(() => {
+    photoPopupAdd.close()
     photoPopupAdd.renderLoading(false)
   })
     .catch((err) => {
@@ -117,9 +120,10 @@ const popUpEditAvatar = new PopupWithForm(updateAvatarPopupSelector, () => {
   api.editUserAvatar(profileAvatarInput.value)
     .then((res) => {
       userInfo.setUserInfo(res)
-      popUpEditAvatar.close()
+
     })
     .finally(() => {
+      popUpEditAvatar.close()
       popUpEditAvatar.renderLoading(false)
     }).catch((err) => {
     console.log(err); // выведем ошибку в консоль
@@ -195,8 +199,11 @@ const deleteConfirm = (evt, newCard) => {
   api.removeCard(newCard.getIdCard())
     .then(response => {
       newCard.removeCard()
-      popUpDeleteConfirm.close()
-    }).catch((err) => {
+
+    }).finally(() => {
+    popUpDeleteConfirm.close()
+  })
+    .catch((err) => {
     console.log(err); // выведем ошибку в консоль
   });
 }
